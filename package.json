@@ -1,13 +1,14 @@
 {
-  "name": "node-js-sample",
+  "name": "node-g6k",
   "version": "0.2.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "Handles inbound order requests and passes them through to Shopify",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    ""
   },
   "engines": {
     "node": "4.0.0"
@@ -18,8 +19,7 @@
   },
   "keywords": [
     "node",
-    "heroku",
-    "express"
+    "g6k"
   ],
   "author": "Mark Pundsack",
   "contributors": [
