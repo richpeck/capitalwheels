@@ -21,11 +21,7 @@ var app = express()
 
 // Shopify
 const Shopify = require('shopify-api-node');
-const shopify = new Shopify({
-  shopName: process.env.SHOPIFY_NAME,
-  apiKey:   process.env.SHOPIFY_API,
-  password: process.env.SHOPIFY_PASS
-})
+
 
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
@@ -34,6 +30,8 @@ const shopify = new Shopify({
 app.set('port', (process.env.PORT || 3000))
 app.use(express.static(__dirname + '/public'))
 
+// Standard inbound
+// This has to be
 app.get('/', function(request, response) {
   response.send('Hello World!')
 })
