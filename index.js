@@ -105,23 +105,34 @@ app.listen(app.get('port'), function() {
 // Properties Function
 // Would rather this be inline but apparently Node can't do that
 function properties(params,callback){
+
+  // Properties Array
   let properties = [];
 
   // Cycle through params
-  // Only need "properties" params
-  for (property in params) {
+  // Only need "properties"
+  Object.keys(params)
+    .filter((name) => /properties/.test(name)) // only properties
+    .filter((name) => (params[name] !== "")) // remove empty values
+    .forEach(function(property) { // cycle
 
-    // Skip nil values
-    if(params[property] === "") { continue; }
+    // Rebuild the key to get rid of the properties[] element
+    // This allows us to only show what we want the user to see
+    //https://stackoverflow.com/a/17779833/1143732
+    let name = property.match(/\[.*?\]/g);
 
     // build new custom option from the property
     // add it to the properties variable
-    let item = { "name": property, "value": JSON.stringify(params[property]) }
-    properties.push(item);
+    properties.push({ "name": name.toString().replace(/[\[\]']/g,''), "value": params[property].toString() });
 
-  }
+  });
+
+  // Send data back
   return callback(properties);
 }
+
+///////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 
 // INBOUND
 // https://g6k.carte-grise-pref.fr/order (POST)
@@ -172,13 +183,14 @@ router
 
         },
         {
-          
+
           // Custom line item
           // Allows us to determine price the user pays
-          "title":   "Taxes",
-          "price":   params["properties[_y6_taxes_a_payer]"],
-          "taxable": false,
-          "quantity": 1
+          "title":      "Taxes",
+          "price":      params["properties[_y6_taxes_a_payer]"],
+          "taxable":    false,
+          "quantity":   1,
+          "properties": properties(params, (data) => { return data; })
 
         }
       ]
