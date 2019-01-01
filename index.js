@@ -36,6 +36,7 @@ const router  = express.Router()
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 
+// Shopify
 // https://www.npmjs.com/package/shopify-api-node
 const Shopify = require('shopify-api-node');
 const shopify = new Shopify({
@@ -104,10 +105,15 @@ app.listen(app.get('port'), function() {
 
 // Properties Function
 // Would rather this be inline but apparently Node can't do that
-function properties(params,callback){
+function properties(params,callback,tax){
 
   // Properties Array
   let properties = [];
+
+  // Regex Test
+  let regex = function(t){
+    return /^[Y]/.test(t);
+  };
 
   // Cycle through params
   // Only need "properties"
@@ -118,12 +124,21 @@ function properties(params,callback){
 
     // Rebuild the key to get rid of the properties[] element
     // This allows us to only show what we want the user to see
-    //https://stackoverflow.com/a/17779833/1143732
-    let name = property.match(/\[.*?\]/g);
+    // https://stackoverflow.com/a/17779833/1143732
+    let name = property.match(/\[.*?\]/g).toString().replace(/[\[\]']/g,'');
+    let prop = params[property].toString(); // Manipulate vars here - allows us to change them later
 
-    // build new custom option from the property
-    // add it to the properties variable
-    properties.push({ "name": name.toString().replace(/[\[\]']/g,''), "value": params[property].toString() });
+    // Do something to determine whether property should be pursued or not
+    // For now, we'll just handle true/false for whether the "tax" should be shown, or whether it should be the other stuff
+    // Obviously, this should change to a regex-based system...
+    if ((tax) && (!regex(name))) {
+      return; // Skips if "tax" var is present and the property does not have y in the beginning
+    } else if ((!tax) && (regex(name))) {
+      return; // Skips if tax is not present and it has "y" in the beginning
+    }
+
+    // Append the new values to the "properties" variable
+    properties.push({ "name": name, "value": prop });
 
   });
 
@@ -187,10 +202,10 @@ router
           // Custom line item
           // Allows us to determine price the user pays
           "title":      "Taxes",
-          "price":      params["properties[_y6_taxes_a_payer]"],
+          "price":      params["properties[Y6 - Taxes à payer]"],
           "taxable":    false,
           "quantity":   1,
-          "properties": properties(params, (data) => { return data; })
+          "properties": properties(params, (data) => { return data; }, true)
 
         }
       ]
