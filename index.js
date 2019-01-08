@@ -104,7 +104,7 @@ router
     });
 
     // Response
-    response.send(['12','56','66','109']);
+    response.send(array);
 
 });
 
