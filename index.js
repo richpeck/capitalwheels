@@ -49,24 +49,6 @@ const shopify = new Shopify({
 app.set('port', (process.env.PORT || 3000))
 app.use(express.static(__dirname + '/public')) // Assets
 
-// Base URL
-// This is meant to provide users with the ability to access the app on /order
-// It allows us to use relative URL's without having to make a big deal about accepting inbound requests etc
-app.use('/', router);
-
-// CORS
-// https://github.com/expressjs/cors
-var whitelist = ['https://wish2win.myshopify.com', 'https://wish2winuk.com']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-
 // BodyParser
 // Allows us to view/manage data passed through the body tag of the request
 // https://stackoverflow.com/a/24330353/1143732
@@ -101,7 +83,7 @@ app.listen(app.get('port'), function() {
 // This will take the data, send it to Shopify and then build a "checkout" response
 router
   .route('/')
-  .get(express.urlencoded({extended: false}), function(request, response, next) {
+  .get(express.urlencoded({extended: false}), cors(), function(request, response, next) {
 
     // Get params etc
     var id = request.query.id;
