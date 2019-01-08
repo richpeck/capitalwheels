@@ -94,7 +94,9 @@ router
     var product_id = request.query.id;
 
     // Orders
-    shopify.order.list({ fields: ['id','line_items'] }).then(orders => console.log(orders));
+    shopify.order.list({ fields: ['id','line_items'] }).then(function(orders){
+      console.log(orders);
+    });
 
     // Response
     response.send(['12','56','66','109']);
