@@ -98,7 +98,9 @@ router
 
     // Orders
     shopify.order.list({ fields: ['id','line_items'] }).then(function(orders){
+      console.log(orders);
       orders.forEach(function(element) {
+        console.log(element);
         array.push(element['id']);
       });
     });
