@@ -49,6 +49,11 @@ const shopify = new Shopify({
 app.set('port', (process.env.PORT || 3000))
 app.use(express.static(__dirname + '/public')) // Assets
 
+// Base URL
+// This is meant to provide users with the ability to access the app on /order
+// It allows us to use relative URL's without having to make a big deal about accepting inbound requests etc
+app.use('/', router);
+
 // BodyParser
 // Allows us to view/manage data passed through the body tag of the request
 // https://stackoverflow.com/a/24330353/1143732
