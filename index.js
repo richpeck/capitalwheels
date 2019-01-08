@@ -101,6 +101,7 @@ router
         element['line_items'].forEach(function(line_item) {
           if(line_item['product_id'] == request.query.id) {
             line_item['properties'].forEach(function(property){
+              console.log(property);
               if(property['name'] == "Ticket"){
                 array.push(property['value']);
               }
