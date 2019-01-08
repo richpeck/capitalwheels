@@ -93,21 +93,22 @@ router
     // Get params etc
     var product_id = request.query.id;
 
-    // Array
-    var array = [];
-
     // Orders
     shopify.order.list({ fields: ['id','line_items'] }).then(function(orders){
-      console.log(orders);
+
+      // Array
+      var array = [];
+
+      // Cycle through response
       orders.forEach(function(element) {
         console.log(element);
         array.push(element['id']);
       });
+
+      // Response
+      response.send(array);
+
     });
-
-    // Response
-    response.send(array);
-
 });
 
 ///////////////////////////////////////////////////////////////
