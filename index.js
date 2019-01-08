@@ -100,7 +100,11 @@ router
       orders.forEach(function(element) {
         element['line_items'].forEach(function(line_item) {
           if(line_item['product_id'] == request.query.id) {
-            array.push(element['id']);
+            line_item['properties'].forEach(function(property){
+              if(property['name'] == "Ticket"){
+                array.push(property['value']);
+              }
+            });
           }
         });
       });
