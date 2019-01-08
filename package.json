@@ -11,7 +11,7 @@
     "shopify-api-node": "^2.17.0"
   },
   "engines": {
-    "node": "4.0.0"
+    "node": "4.7.0"
   },
   "repository": {
     "type": "git",
