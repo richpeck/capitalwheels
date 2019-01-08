@@ -91,7 +91,13 @@ router
   .get(express.urlencoded({extended: false}), cors(), function(request, response, next) {
 
     // Get params etc
-    var id = request.query.id;
+    var product_id = request.query.id;
+
+    // Orders
+    var orders = shopify.order.list({ fields: { 'id', 'line_items' } });
+
+    // Show orders in log
+    console.log(orders);
 
     // Response
     response.send(['12','56','66','109']);
