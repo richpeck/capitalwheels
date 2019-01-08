@@ -94,7 +94,7 @@ router
     var product_id = request.query.id;
 
     // Orders
-    var orders = shopify.order.list({ fields: { 'id', 'line_items' } });
+    var orders = shopify.order.list();
 
     // Show orders in log
     console.log(orders);
