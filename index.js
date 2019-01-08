@@ -56,7 +56,7 @@ app.use('/', router);
 
 // CORS
 // https://github.com/expressjs/cors
-var whitelist = ['https://wish2win.myshopify.com']
+var whitelist = ['https://wish2win.myshopify.com', 'https://wish2winuk.com']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
