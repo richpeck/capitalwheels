@@ -5,6 +5,7 @@
 // Added a bunch of stuff from https://stackoverflow.com/a/5994334/1143732
 // BaseURL https://github.com/expressjs/express/issues/1611#issuecomment-38358502
 const express = require('express')
+const cors    = require('cors')
 const app     = express()
 const router  = express.Router()
 
@@ -53,12 +54,26 @@ app.use(express.static(__dirname + '/public')) // Assets
 // It allows us to use relative URL's without having to make a big deal about accepting inbound requests etc
 app.use('/', router);
 
+// CORS
+// https://github.com/expressjs/cors
+let whitelist = ['http://wish2win.myshopify.com']
+let corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
 // BodyParser
 // Allows us to view/manage data passed through the body tag of the request
 // https://stackoverflow.com/a/24330353/1143732
 // No need for bodyparser package anymore - https://expressjs.com/en/4x/api.html#express.json
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors(corsOptions));
 
 // Error
 // https://webapplog.com/error-handling-and-running-an-express-js-app/
