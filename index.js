@@ -94,10 +94,7 @@ router
     var product_id = request.query.id;
 
     // Orders
-    var orders = shopify.order.list();
-
-    // Show orders in log
-    console.log(orders);
+    shopify.order.list().then(orders => console.log(orders));
 
     // Response
     response.send(['12','56','66','109']);
