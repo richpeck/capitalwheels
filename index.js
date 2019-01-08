@@ -90,9 +90,6 @@ router
   .route('/')
   .get(express.urlencoded({extended: false}), cors(), function(request, response, next) {
 
-    // Get params etc
-    var product_id = request.query.id;
-
     // Orders
     shopify.order.list({ fields: ['id','line_items'] }).then(function(orders){
 
@@ -101,8 +98,11 @@ router
 
       // Cycle through response
       orders.forEach(function(element) {
-        console.log(element);
-        array.push(element['id']);
+        element['line_items'].forEach(function(line_item) {
+          if(line_item['product_id'] == request.query.id) {
+            array.push(element['id']);
+          }
+        });
       });
 
       // Response
