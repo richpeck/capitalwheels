@@ -104,7 +104,7 @@ router
   .get(express.urlencoded({extended: false}), function(request, response, next) {
 
     // Get params etc
-    let id = request.query.id;
+    var id = request.query.id;
 
     // Response
     response.send(['12','56','66','109']);
