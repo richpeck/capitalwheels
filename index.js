@@ -93,9 +93,14 @@ router
     // Get params etc
     var product_id = request.query.id;
 
+    // Array
+    var array = [];
+
     // Orders
     shopify.order.list({ fields: ['id','line_items'] }).then(function(orders){
-      console.log(orders);
+      orders.forEach(function(element) {
+        array.push(element['id']);
+      });
     });
 
     // Response
