@@ -73,7 +73,7 @@ var corsOptions = {
 // No need for bodyparser package anymore - https://expressjs.com/en/4x/api.html#express.json
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Error
 // https://webapplog.com/error-handling-and-running-an-express-js-app/
