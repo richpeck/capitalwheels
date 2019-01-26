@@ -83,8 +83,8 @@ app.listen(app.get('port'), function() {
 ///////////////////////////////////////////////////////////////
 
 // INBOUND
-// https://g6k.carte-grise-pref.fr/order (POST)
-// This has to be JSON/XHR only && accept the data from the submitted form
+// https://capital-wheels.myshopify.com -> https://capitalwheels.herokuapp.com
+// This has to be JSON/XHR only & take a querystring that allows us to return products
 // This will take the data, send it to Shopify and then build a "checkout" response
 router
   .route('/')
@@ -94,21 +94,7 @@ router
     shopify.order.list({ fields: ['id','line_items'] }).then(function(orders){
 
       // Array
-      var array = [];
-
-      // Cycle through response
-      orders.forEach(function(element) {
-        element['line_items'].forEach(function(line_item) {
-          if(line_item['product_id'] == request.query.id) {
-            line_item['properties'].forEach(function(property){
-              if(property['name'] == "Ticket"){
-                array.push(property['value']);
-              }
-            });
-          }
-        });
-      });
-
+  
       // Response
       response.send(array);
 
