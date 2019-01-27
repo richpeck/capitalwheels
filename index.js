@@ -109,6 +109,10 @@ router
       // We cycle through the collections and build arrays of those which match the patterns
       products.forEach(function(product){
 
+        // Tags
+        // This splits up the tags var and allows us to manage it
+        var tags = products.split(",");
+
         // Bolt Pattern
         // Direct match (5x112)
         // Need to build an array of "bolt pattern" listings
