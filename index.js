@@ -93,7 +93,7 @@ router
     // Collections
     // This is used to get a list of all the collections that the store has
     // We're then able to filter the collections and use the data to determine which products to show
-    shopify.smartCollection.list({ fields: ["id", "handle"] }).then(function(collections){
+    shopify.smartCollection.list({ fields: ["id", "handle", "rules"] }).then(function(collections){
 
       // Vars
       // This is used to get all the data required to show the products
@@ -112,13 +112,13 @@ router
         // We need to build an array of "bolt pattern" listings
         if( RegExp('^((?!bolt).)*').test(collection["handle"]) ) {
           bolt_patterns.push(collection);
-          
+
           console.log(collection);
-          console.log( RegExp('^((?!bolt).)*').test(collection["handle"]) );
+          console.log( RegExp('@"\b-1*bolt*\b"', 'g').test(collection["handle"]) );
 
         }
 
-        // Central Border
+        // Central Bore (CB)
         // Mathematical (> 64.1)
         // Allows us to identify based on the CB of the wheel
         //
