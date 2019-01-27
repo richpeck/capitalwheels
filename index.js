@@ -93,23 +93,35 @@ router
     // Collections
     // This is used to get a list of all the collections that the store has
     // We're then able to filter the collections and use the data to determine which products to show
-    shopify.smartCollection.list({ fields: ["id", "handle", "body_html"] }).then(function(collections){
+    shopify.smartCollection.list({ fields: ["id", "handle"] }).then(function(collections){
 
       // Vars
       // This is used to get all the data required to show the products
       // Corresponding to a specific group of collections
+      let bolt_patterns = [];
+      let central_bore  = [];
+      let rim_offset    = [];
 
-      // Bolt Pattern
-      // This needs to show the wheels for the specific bolt pattern
-      // This should be a direct match
-      collections.forEach(function(i){
-        console.log( i["body_html"] );
+      // Collection ID's
+      // This needs to show the ID's for the various queries
+      // We cycle through the collections and build arrays of those which match the patterns
+      collections.forEach(function(collection){
+
+        // Bolt Pattern
+        // Direct match (5x112)
+        // We need to build an array of "bolt pattern" listings
+        if(  RegExp('^((?!bolt).)*').test(collection["handle"]) ) bolt_patterns.push(collection)
+
+        // Central Border
+        // Allows us to identify based on the CB of the wheel
+        //
+
       });
 
       // Response
       // This allows us to send specific groups of products back to the user
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
-      response.send(collections);
+      response.send(bolt_patterns);
 
     });
 });
