@@ -109,26 +109,31 @@ router
 
         // Bolt Pattern
         // Direct match (5x112)
-        // We need to build an array of "bolt pattern" listings
+        // Need to build an array of "bolt pattern" listings
         if( RegExp('-bolt$').test(collection["handle"]) ) {
           bolt_patterns.push(collection);
-
-          console.log(collection);
-          console.log( RegExp('-bolt$', 'g').test(collection["handle"]) );
-
         }
 
         // Central Bore (CB)
         // Mathematical (> 64.1)
         // Allows us to identify based on the CB of the wheel
-        //
+        if( RegExp('-cb$').test(collection["handle"]) ) {
+          central_bore.push(collection);
+        }
+
+        // Rim Offset
+        // Mathematical (< 45mm)
+        // Helps us identify the right wheel
+        if( RegExp('-et$').test(collection["handle"]) ) {
+          rim_offset.push(collection);
+        }
 
       });
 
       // Response
       // This allows us to send specific groups of products back to the user
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
-      response.send(bolt_patterns);
+      response.send(collections);
 
     });
 });
