@@ -114,7 +114,7 @@ router
           bolt_patterns.push(collection);
 
           console.log(collection);
-          console.log( RegExp('@"\b-1*bolt*\b"', 'g').test(collection["handle"]) );
+          console.log( RegExp('\S*bolt\b ', 'g').test(collection["handle"]) );
 
         }
 
