@@ -90,41 +90,43 @@ router
   .route('/')
   .get(express.urlencoded({extended: false}), cors(), function(request,response,next) {
 
-    // Collections
-    // This is used to get a list of all the collections that the store has
-    // We're then able to filter the collections and use the data to determine which products to show
-    shopify.smartCollection.list({ fields: ["id", "handle", "rules"] }).then(function(collections){
+    // Products
+    // This is used to get a list of all the products that the store has
+    // We're then able to filter the products based on their tags (much more direct than collections)
+    // After doing this, we add the product to the applicable variables
+    shopify.product.list().then(function(products)){
 
       // Vars
       // This is used to get all the data required to show the products
+      // Basically add the products to the variables mentioned below and return the ones which fit everything directly
       // Corresponding to a specific group of collections
       var bolt_patterns = [];
       var central_bore  = [];
       var rim_offset    = [];
 
-      // Collection ID's
-      // This needs to show the ID's for the various queries
+      // Product ID's
+      // This allows us to get access to each product (to manage their tags)
       // We cycle through the collections and build arrays of those which match the patterns
-      collections.forEach(function(collection){
+      products.forEach(function(product){
 
         // Bolt Pattern
         // Direct match (5x112)
         // Need to build an array of "bolt pattern" listings
-        if( RegExp('-bolt$').test(collection["handle"]) ) {
-          bolt_patterns.push(collection);
+        if( RegExp('-bolt$').test(product["tags"]) ) {
+          bolt_patterns.push(product);
         }
 
         // Central Bore (CB)
         // Mathematical (> 64.1)
         // Allows us to identify based on the CB of the wheel
-        if( RegExp('-cb$').test(collection["handle"]) ) {
+        if( RegExp('-cb$').test(collection["tags"]) ) {
           central_bore.push(collection);
         }
 
         // Rim Offset
         // Mathematical (< 45mm)
         // Helps us identify the right wheel
-        if( RegExp('-et$').test(collection["handle"]) ) {
+        if( RegExp('-et$').test(product["tags"]) ) {
           rim_offset.push(collection);
         }
 
@@ -133,7 +135,7 @@ router
       // Response
       // This allows us to send specific groups of products back to the user
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
-      response.send(rim_offset);
+      response.send(products);
 
     });
 });
