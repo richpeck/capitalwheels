@@ -111,7 +111,7 @@ router
 
         // Tags
         // This splits up the tags var and allows us to manage it
-        var tags = product["tags"].split(",");
+        var tags = product["tags"].split(", ");
 
         // Values
         // These are used to build a query against which we can filter the products
