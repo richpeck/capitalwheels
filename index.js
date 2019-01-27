@@ -121,11 +121,12 @@ router
 
         console.log(bolt_pattern);
         console.log(tags);
+        console.log(tags.indexOf(bolt_pattern));
 
         // Bolt Pattern
         // Direct match (5x112)
         // Need to build an array of "bolt pattern" listings
-        if( tags.indexOf("CB " + bolt_pattern) !== -1 ) { // Direct match
+        if( tags.indexOf(bolt_pattern) !== -1 ) { // Direct match
           bolt_patterns.push(product);
         }
 
