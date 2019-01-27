@@ -96,16 +96,16 @@ router
     shopify.smartCollection.list().then(function(collections){
 
       // Vars
-      // This is used to get all the data required to show the products 
+      // This is used to get all the data required to show the products
       // Corresponding to a specific group of collections
-      let bolt_pattern = "x";
-      let central_bore = "y";
-      let rim          = "17";
+      var bolt_pattern = "x";
+      var central_bore = "y";
+      var rim          = "17";
 
       // Bolt Pattern
       // This needs to show the wheels for the specific bolt pattern
       // This should be a direct match
-      collection.each(function(index,element){
+      collections.each(function(index,element){
         console.log(element);
       });
 
