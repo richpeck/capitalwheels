@@ -115,7 +115,7 @@ router
 
         // Values
         // These are used to build a query against which we can filter the products
-        var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern.toString() : "";
+        var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern.toString().toUpperCase() : ""; // uppercase needed to ensure we could match 5X100
         var central_bore = (request.query.central_bore) ? request.query.central_bore.toString() : "";
 
 
