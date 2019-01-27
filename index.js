@@ -98,9 +98,9 @@ router
       // Vars
       // This is used to get all the data required to show the products
       // Corresponding to a specific group of collections
-      let bolt_patterns = [];
-      let central_bore  = [];
-      let rim_offset    = [];
+      var bolt_patterns = [];
+      var central_bore  = [];
+      var rim_offset    = [];
 
       // Collection ID's
       // This needs to show the ID's for the various queries
@@ -113,6 +113,7 @@ router
         if(  RegExp('^((?!bolt).)*').test(collection["handle"]) ) bolt_patterns.push(collection)
 
         // Central Border
+        // Mathematical (> 64.1)
         // Allows us to identify based on the CB of the wheel
         //
 
