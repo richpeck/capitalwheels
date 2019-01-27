@@ -116,7 +116,7 @@ router
         // Values
         // These are used to build a query against which we can filter the products
         var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern.toString().toUpperCase() : ""; // uppercase needed to ensure we could match 5X100
-        var central_bore = (request.query.central_bore) ? request.query.central_bore : ""; // allows us to determine which bore is being sent
+        var central_bore = (request.query.central_bore) ? parseFloat(request.query.central_bore) : ""; // allows us to determine which bore is being sent
         var rim_offset   = (request.query.offset) ? request.query.offset : ""; // allows us to determine which offset is being sent
 
         // Bolt Pattern
@@ -140,7 +140,7 @@ router
             value = tag.split(" "); // CB[0] 66.6[1]
             console.log("TESSSTER");
             console.log(value[1]);
-            //if (value[1] >= central_bore) central_bore.push(product); // Only if bore is greater than spec
+            if(value[1] >= central_bore) central_bore.push(product); // Only if bore is greater than spec
           }
 
           // Rim (ET Offset)
