@@ -93,7 +93,7 @@ router
     // Collections
     // This is used to get a list of all the collections that the store has
     // We're then able to filter the collections and use the data to determine which products to show
-    shopify.smartCollection.list().then(function(collections){
+    shopify.smartCollection.list({ fields: ["id", "handle", "body_html"] }).then(function(collections){
 
       // Vars
       // This is used to get all the data required to show the products
