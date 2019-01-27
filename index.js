@@ -103,9 +103,8 @@ router
       // Bolt Pattern
       // This needs to show the wheels for the specific bolt pattern
       // This should be a direct match
-      $.each(collections, function(index,element){
-        console.log(element);
-      });
+
+      
 
       // Response
       // This allows us to send specific groups of products back to the user
