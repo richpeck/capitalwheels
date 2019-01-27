@@ -158,7 +158,7 @@ router
 
       // Return
       // Gives us the ability to return only the products present from the points
-      response.send(items.size);
+      response.send(parseFloat(items.size));
 
     });
 });
