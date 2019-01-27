@@ -126,8 +126,6 @@ router
           bolt_patterns.push(product);
         }
 
-        console.log(rim_offset);
-
         // Others
         // This is required because otherwise, we'd have to regex against each element of the array
         tags.forEach(function(tag) {
