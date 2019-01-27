@@ -88,15 +88,15 @@ app.listen(app.get('port'), function() {
 // This will take the data, send it to Shopify and then build a "checkout" response
 router
   .route('/')
-  .get(express.urlencoded({extended: false}), cors(), function(request, response, next) {
+  .get(express.urlencoded({extended: false}), cors(), function(request,response,next) {
 
-    // Orders
-    shopify.order.list({ fields: ['id','line_items'] }).then(function(orders){
+    // Collections
+    // This is used to get a list of all the collections that the store has
+    // We're then able to filter the collections and use the data to determine which products to show
+    shopify.collection_listings.list({ fields: ['collection_id','title'] }).then(function(collections){
 
-      // Array
-  
       // Response
-      response.send(array);
+      response.send(collections);
 
     });
 });
