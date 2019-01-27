@@ -99,12 +99,12 @@ router
       // This is used to get all the data required to show the products
       // Corresponding to a specific group of collections
 
-
       // Bolt Pattern
       // This needs to show the wheels for the specific bolt pattern
       // This should be a direct match
-      collections.forEach(function(i){ console.log(i); });
-      console.log(collections);
+      collections.forEach(function(i){
+        console.log(i["body_html"]);
+      });
 
       // Response
       // This allows us to send specific groups of products back to the user
