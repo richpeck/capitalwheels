@@ -93,7 +93,7 @@ router
     // Collections
     // This is used to get a list of all the collections that the store has
     // We're then able to filter the collections and use the data to determine which products to show
-    shopify.collection_listings.list({ fields: ['collection_id','title'] }).then(function(collections){
+    shopify.collectionListing.list({ fields: ['collection_id','title'] }).then(function(collections){
 
       // Response
       response.send(collections);
