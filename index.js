@@ -116,8 +116,8 @@ router
         // Values
         // These are used to build a query against which we can filter the products
         var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern.toString().toUpperCase() : ""; // uppercase needed to ensure we could match 5X100
-        var central_bore = (request.query.central_bore) ? parseFloat(request.query.central_bore) : ""; // allows us to determine which bore is being sent
-        var rim_offset   = (request.query.offset) ? request.query.offset : ""; // allows us to determine which offset is being sent
+        var central_bore = (request.query.central_bore) ? parseFloat(request.query.central_bore)              : ""; // allows us to determine which bore is being sent
+        var rim_offset   = (request.query.offset)       ? Number((request.query.offset).match(/\d+$/)         : ""; // allows us to determine which offset is being sent
 
         // Bolt Pattern
         // Direct match (5x112)
@@ -125,6 +125,8 @@ router
         if( tags.indexOf(bolt_pattern) !== -1 ) { // Direct match
           bolt_patterns.push(product);
         }
+
+        console.log(rim_offset);
 
         // Others
         // This is required because otherwise, we'd have to regex against each element of the array
@@ -144,8 +146,6 @@ router
           if( RegExp('ET*').test(tag) ) {
             value = tag.split(" "); // ET[0] 42MM[1]
             val = Number((value[1]).match(/\d+$/));
-            console.log(val);
-            console.log(rim_offset);
             if(val <= rim_offset) rim_offsets.push(product); // Only if ET is less than spec
           }
 
