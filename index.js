@@ -117,7 +117,7 @@ router
         // These are used to build a query against which we can filter the products
         var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern.toString().toUpperCase()            : ""; // uppercase needed to ensure we could match 5X100
         var central_bore = (request.query.central_bore) ? parseFloat(request.query.central_bore)                         : ""; // allows us to determine which bore is being sent
-        var rim_offset   = (request.query.offset)       ? parseFloat((request.query.offset.toString().replace(/\D/g,'')) : ""; // allows us to determine which offset is being sent
+        var rim_offset   = (request.query.offset)       ? parseFloat( request.query.offset.toString().replace(/[^\d.-]/g,'') ) : ""; // allows us to determine which offset is being sent
 
         // Bolt Pattern
         // Direct match (5x112)
