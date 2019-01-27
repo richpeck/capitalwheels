@@ -119,15 +119,15 @@ router
         // Central Bore (CB)
         // Mathematical (> 64.1)
         // Allows us to identify based on the CB of the wheel
-        if( RegExp('-cb$').test(collection["tags"]) ) {
-          central_bore.push(collection);
+        if( RegExp('-cb$').test(product["tags"]) ) {
+          central_bore.push(product);
         }
 
         // Rim Offset
         // Mathematical (< 45mm)
         // Helps us identify the right wheel
         if( RegExp('-et$').test(product["tags"]) ) {
-          rim_offset.push(collection);
+          rim_offset.push(product);
         }
 
       });
