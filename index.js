@@ -157,6 +157,7 @@ router
       data = bolt_patterns.concat(central_bores, rim_offsets);
 
       console.log(items.size)
+      console.log( Array.from(items) );
 
       // Return
       // Gives us the ability to return only the products present from the points
