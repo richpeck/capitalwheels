@@ -101,8 +101,8 @@ router
       // Basically add the products to the variables mentioned below and return the ones which fit everything directly
       // Corresponding to a specific group of collections
       var bolt_patterns = [];
-      var central_bore  = [];
-      var rim_offset    = [];
+      var central_bores = [];
+      var rim_offsets   = [];
 
       // Product ID's
       // This allows us to get access to each product (to manage their tags)
@@ -142,7 +142,7 @@ router
             console.log(value[1]);
             console.log(central_bore);
             console.log(value[1] >= central_bore);
-            //if(value[1] >= central_bore) central_bore.push(product); // Only if bore is greater than spec
+            if(value[1] >= central_bore) central_bores.push(product); // Only if bore is greater than spec
           }
 
           // Rim (ET Offset)
@@ -158,7 +158,7 @@ router
       // Response
       // This allows us to send specific groups of products back to the user
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
-      data = bolt_patterns.concat(central_bore, rim_offset);
+      data = bolt_patterns.concat(central_bores, rim_offsets);
 
       // Return
       // Gives us the ability to return only the products present from the points
