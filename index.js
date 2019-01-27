@@ -115,8 +115,8 @@ router
 
         // Values
         // These are used to build a query against which we can filter the products
-        var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern : "";
-        var central_bore = (request.query.central_bore) ? request.query.central_bore : "";
+        var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern.toString : "";
+        var central_bore = (request.query.central_bore) ? request.query.central_bore.toString : "";
 
 
         console.log(bolt_pattern);
