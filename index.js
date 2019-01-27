@@ -130,6 +130,9 @@ router
         // This is required because otherwise, we'd have to regex against each element of the array
         tags.forEach(function(tag) {
 
+          console.log(tag);
+          console.log(RegExp('CB*').test(tag));
+
           // Central Bore (CB)
           // Mathematical (> 64.1)
           // Allows us to identify based on the CB of the wheel
