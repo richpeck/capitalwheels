@@ -103,7 +103,7 @@ router
       // Bolt Pattern
       // This needs to show the wheels for the specific bolt pattern
       // This should be a direct match
-      collections.each(function(i,e){ console.log(i); });
+      collections.forEach(function(i){ console.log(i); });
       console.log(collections);
 
       // Response
