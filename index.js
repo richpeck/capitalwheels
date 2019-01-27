@@ -115,12 +115,13 @@ router
 
         // Values
         // These are used to build a query against which we can filter the products
-        var bolt_pattern = "5x120";
+        var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern : "";
+        var central_bore = (request.query.central_bore) ? request.query.central_bore : "";
 
         // Bolt Pattern
         // Direct match (5x112)
         // Need to build an array of "bolt pattern" listings
-        if( $.inArray(bolt_pattern, tags) ) { // Direct match
+        if( bolt_pattern ) { // Direct match
           bolt_patterns.push(product);
         }
 
