@@ -137,7 +137,8 @@ router
           // Mathematical (> 64.1)
           // Allows us to identify based on the CB of the wheel
           if( RegExp('CB*').test(tag) ) {
-            value = tag.split(" "); // CB 66.6
+            value = tag.split(" "); // CB[0] 66.6[1]
+            console.log("TESSSTER");
             console.log(value[1]);
             //if (value[1] >= central_bore) central_bore.push(product); // Only if bore is greater than spec
           }
