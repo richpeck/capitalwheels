@@ -110,7 +110,7 @@ router
         // Bolt Pattern
         // Direct match (5x112)
         // We need to build an array of "bolt pattern" listings
-        if( RegExp('\S*bolt\b', 'g').test(collection["handle"]) ) {
+        if( RegExp('\S*bolt\b').test(collection["handle"]) ) {
           bolt_patterns.push(collection);
 
           console.log(collection);
