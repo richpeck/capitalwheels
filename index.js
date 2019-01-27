@@ -130,26 +130,23 @@ router
         // This is required because otherwise, we'd have to regex against each element of the array
         tags.forEach(function(tag) {
 
-          console.log(tag);
-          console.log(RegExp('CB*').test(tag));
-
           // Central Bore (CB)
           // Mathematical (> 64.1)
           // Allows us to identify based on the CB of the wheel
           if( RegExp('CB*').test(tag) ) {
             value = tag.split(" "); // CB[0] 66.6[1]
-            console.log("TESSSTER");
-            console.log(value[1]);
-            console.log(central_bore);
-            console.log(value[1] >= central_bore);
             if(value[1] >= central_bore) central_bores.push(product); // Only if bore is greater than spec
           }
 
           // Rim (ET Offset)
           // Mathematical (< 45mm)
           // Helps us identify the right wheel
-          if( RegExp('-et$').test(product["tags"]) ) {
-            rim_offset.push(product);
+          if( RegExp('ET*').test(tag) ) {
+            value = tag.split(" "); // ET[0] 42MM[1]
+            val = Number((value[1]).match(/\d+$/));
+            console.log(val);
+            console.log(rim_offset);
+            if(val <= rim_offset) rim_offsets.push(product); // Only if ET is less than spec
           }
 
         });
