@@ -116,12 +116,8 @@ router
         // Values
         // These are used to build a query against which we can filter the products
         var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern.toString().toUpperCase() : ""; // uppercase needed to ensure we could match 5X100
-        var central_bore = (request.query.central_bore) ? request.query.central_bore.toString() : "";
-
-
-        console.log(bolt_pattern);
-        console.log(tags);
-        console.log(tags.indexOf(bolt_pattern));
+        var central_bore = (request.query.central_bore) ? request.query.central_bore : ""; // allows us to determine which bore is being sent
+        var rim_offset   = (request.query.offset) ? request.query.offset : ""; // allows us to determine which offset is being sent
 
         // Bolt Pattern
         // Direct match (5x112)
@@ -130,30 +126,36 @@ router
           bolt_patterns.push(product);
         }
 
-        // Central Bore (CB)
-        // Mathematical (> 64.1)
-        // Allows us to identify based on the CB of the wheel
-        if( RegExp('-cb$').test(product["tags"]) ) {
-          central_bore.push(product);
-        }
+        // Others
+        // This is required because otherwise, we'd have to regex against each element of the array
+        tags.forEach(function(tag) {
 
-        // Rim Offset
-        // Mathematical (< 45mm)
-        // Helps us identify the right wheel
-        if( RegExp('-et$').test(product["tags"]) ) {
-          rim_offset.push(product);
-        }
+          // Central Bore (CB)
+          // Mathematical (> 64.1)
+          // Allows us to identify based on the CB of the wheel
+          if( RegExp('CB*').test(tag) ) {
+            value = tag.split(" "); // CB 66.6
+            if (value[1] >= central_bore) central_bore.push(product); // Only if bore is greater than spec
+          }
 
+          // Rim (ET Offset)
+          // Mathematical (< 45mm)
+          // Helps us identify the right wheel
+          if( RegExp('-et$').test(product["tags"]) ) {
+            rim_offset.push(product);
+          }
+
+        });
       });
 
       // Response
       // This allows us to send specific groups of products back to the user
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
-
+      data = bolt_patterns.concat(central_bore, rim_offset);
 
       // Return
       // Gives us the ability to return only the products present from the points
-      response.send(bolt_patterns);
+      response.send(data);
 
     });
 });
