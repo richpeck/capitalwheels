@@ -111,7 +111,7 @@ router
 
         // Tags
         // This splits up the tags var and allows us to manage it
-        var tags = products.split(",");
+        var tags = product["tags"].split(",");
         console.log(tags);
 
         // Bolt Pattern
