@@ -118,12 +118,14 @@ router
         var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern : "";
         var central_bore = (request.query.central_bore) ? request.query.central_bore : "";
 
+
+        console.log(bolt_pattern);
+        console.log(tags);
+
         // Bolt Pattern
         // Direct match (5x112)
         // Need to build an array of "bolt pattern" listings
-        if( tags.indexOf("CB" + bolt_pattern) !== -1 ) { // Direct match
-          console.log(bolt_pattern);
-          console.log(tags);
+        if( tags.indexOf("CB " + bolt_pattern) !== -1 ) { // Direct match
           bolt_patterns.push(product);
         }
 
