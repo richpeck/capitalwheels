@@ -154,14 +154,7 @@ router
       // Response
       // This allows us to send specific groups of products back to the user
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
-      data = bolt_patterns.concat(central_bores, rim_offsets);
-
-      console.log(items.size)
-      console.log( Array.from(items) );
-
-      // Return
-      // Gives us the ability to return only the products present from the points
-      response.send(Array.from(items) );
+      response.send( Array.from(items) );
 
     });
 });
