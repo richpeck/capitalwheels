@@ -103,7 +103,7 @@ router
       // This needs to show the wheels for the specific bolt pattern
       // This should be a direct match
       collections.forEach(function(i){
-        console.log( i["body_html"].replace(/(<([^>]+)>)/ig,"") );
+        console.log( i["body_html"] );
       });
 
       // Response
