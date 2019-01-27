@@ -94,7 +94,7 @@ router
     // This is used to get a list of all the products that the store has
     // We're then able to filter the products based on their tags (much more direct than collections)
     // After doing this, we add the product to the applicable variables
-    shopify.product.list({ fields: ["id","handle","body_html","tags","images"] }).then(function(products){
+    shopify.product.list({ fields: ["id", "handle", "body_html", "tags", "images"] }).then(function(products){
 
       // Vars
       // This is used to get all the data required to show the products
@@ -112,12 +112,16 @@ router
         // Tags
         // This splits up the tags var and allows us to manage it
         var tags = product["tags"].split(",");
-        console.log(tags);
+
+        // Values
+        // These are used to build a query against which we can filter the products
+        var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern : "";
+        var central_bore = (request.query.central_bore) ? request.query.central_bore : "";
 
         // Bolt Pattern
         // Direct match (5x112)
         // Need to build an array of "bolt pattern" listings
-        if( RegExp('-bolt$').test(product["tags"]) ) {
+        if( $.inArray("CB " + bolt_pattern, tags) ) { // Direct match
           bolt_patterns.push(product);
         }
 
@@ -140,7 +144,11 @@ router
       // Response
       // This allows us to send specific groups of products back to the user
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
-      response.send(products);
+
+
+      // Return
+      // Gives us the ability to return only the products present from the points
+      response.send(bolt_patterns);
 
     });
 });
