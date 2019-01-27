@@ -95,7 +95,23 @@ router
     // We're then able to filter the collections and use the data to determine which products to show
     shopify.smartCollection.list().then(function(collections){
 
+      // Vars
+      // This is used to get all the data required to show the products 
+      // Corresponding to a specific group of collections
+      let bolt_pattern = "x";
+      let central_bore = "y";
+      let rim          = "17";
+
+      // Bolt Pattern
+      // This needs to show the wheels for the specific bolt pattern
+      // This should be a direct match
+      collection.each(function(index,element){
+        console.log(element);
+      });
+
       // Response
+      // This allows us to send specific groups of products back to the user
+      // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
       response.send(collections);
 
     });
