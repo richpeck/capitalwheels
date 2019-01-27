@@ -94,7 +94,7 @@ router
     // This is used to get a list of all the products that the store has
     // We're then able to filter the products based on their tags (much more direct than collections)
     // After doing this, we add the product to the applicable variables
-    shopify.product.list().then(function(products){
+    shopify.product.list({ fields: ["id","handle","body_html","tags","images"] }).then(function(products){
 
       // Vars
       // This is used to get all the data required to show the products
