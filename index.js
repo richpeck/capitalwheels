@@ -103,6 +103,7 @@ router
       var bolt_patterns = [];
       var central_bores = [];
       var rim_offsets   = [];
+      var items = new Set(); // https://dev.to/claireparker/how-to-create-an-array-of-unique-values-in-javascript-using-sets-5dg6
 
       // Product ID's
       // This allows us to get access to each product (to manage their tags)
@@ -123,7 +124,7 @@ router
         // Direct match (5x112)
         // Need to build an array of "bolt pattern" listings
         if( tags.indexOf(bolt_pattern) !== -1 ) { // Direct match
-          bolt_patterns.push(product);
+          items.add(product);
         }
 
         // Others
@@ -135,7 +136,7 @@ router
           // Allows us to identify based on the CB of the wheel
           if( RegExp('CB*').test(tag) ) {
             value = tag.split(" "); // CB[0] 66.6[1]
-            if(value[1] >= central_bore) central_bores.push(product); // Only if bore is greater than spec
+            if(value[1] >= central_bore) items.add(product); // Only if bore is greater than spec
           }
 
           // Rim (ET Offset)
@@ -144,7 +145,7 @@ router
           if( RegExp('ET*').test(tag) ) {
             value = tag.split(" "); // ET[0] 42MM[1]
             val = Number((value[1]).match(/\d+$/));
-            if(val <= rim_offset) rim_offsets.push(product); // Only if ET is less than spec
+            if(val <= rim_offset) items.add(product); // Only if ET is less than spec
           }
 
         });
@@ -157,7 +158,7 @@ router
 
       // Return
       // Gives us the ability to return only the products present from the points
-      response.send(data);
+      response.send(items);
 
     });
 });
