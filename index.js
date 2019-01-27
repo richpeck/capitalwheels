@@ -141,6 +141,7 @@ router
             console.log("TESSSTER");
             console.log(value[1]);
             console.log(central_bore);
+            console.log(value[1] >= central_bore);
             //if(value[1] >= central_bore) central_bore.push(product); // Only if bore is greater than spec
           }
 
