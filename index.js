@@ -120,7 +120,7 @@ router
         // Bolt Pattern
         // Direct match (5x112)
         // Need to build an array of "bolt pattern" listings
-        if( $.inArray("CB " + bolt_pattern, tags) ) { // Direct match
+        if( $.inArray(bolt_pattern, tags) ) { // Direct match
           bolt_patterns.push(product);
         }
 
