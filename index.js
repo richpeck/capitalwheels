@@ -133,7 +133,7 @@ router
       // Response
       // This allows us to send specific groups of products back to the user
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
-      response.send(collections);
+      response.send(contral_bore);
 
     });
 });
