@@ -98,9 +98,7 @@ router
       // Vars
       // This is used to get all the data required to show the products
       // Corresponding to a specific group of collections
-      var bolt_pattern = "x";
-      var central_bore = "y";
-      var rim          = "17";
+
 
       // Bolt Pattern
       // This needs to show the wheels for the specific bolt pattern
