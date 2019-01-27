@@ -156,7 +156,7 @@ router
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
       data = bolt_patterns.concat(central_bores, rim_offsets);
 
-      console.log(items.size;
+      console.log(items.size);
       console.log(items);
 
       // Return
