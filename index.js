@@ -156,9 +156,11 @@ router
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
       data = bolt_patterns.concat(central_bores, rim_offsets);
 
+      console.log(items.size)
+
       // Return
       // Gives us the ability to return only the products present from the points
-      response.send(parseFloat(items.size));
+      response.send(items);
 
     });
 });
