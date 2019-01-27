@@ -138,6 +138,7 @@ router
           // Allows us to identify based on the CB of the wheel
           if( RegExp('CB*').test(tag) ) {
             value = tag.split(" "); // CB 66.6
+            console.log(value[1]);
             if (value[1] >= central_bore) central_bore.push(product); // Only if bore is greater than spec
           }
 
