@@ -110,7 +110,13 @@ router
         // Bolt Pattern
         // Direct match (5x112)
         // We need to build an array of "bolt pattern" listings
-        if(  RegExp('^((?!bolt).)*').test(collection["handle"]) ) bolt_patterns.push(collection)
+        if( RegExp('^((?!bolt).)*').test(collection["handle"]) ) {
+          bolt_patterns.push(collection);
+          
+          console.log(collection);
+          console.log( RegExp('^((?!bolt).)*').test(collection["handle"]) );
+
+        }
 
         // Central Border
         // Mathematical (> 64.1)
