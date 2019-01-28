@@ -165,8 +165,7 @@ router
       // We need to base everything around the bolt_pattern values
       // Bolt_pattern is a direct thing, meaning we can cycle through it and see if there are any matches with the other arrays
       // https://stackoverflow.com/a/45304197/1143732
-      console.log("TESSSST");
-      console.log(bolt_patterns.some(v => rim_offset.includes(v)));
+      items = bolt_patterns;
 
       // Response
       // This allows us to send specific groups of products back to the user
