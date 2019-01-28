@@ -101,7 +101,10 @@ router
       // Basically add the products to the variables mentioned below and return the ones which fit everything directly
       // Corresponding to a specific group of collections
       // https://dev.to/claireparker/how-to-create-an-array-of-unique-values-in-javascript-using-sets-5dg6
-      var items = new Set();
+      var bolt_patterns = new Set();
+      var central_bores = new Set();
+      var rim_offsets   = new Set();
+      var items         = new Set();
 
       // Product ID's
       // This allows us to get access to each product (to manage their tags)
@@ -122,7 +125,7 @@ router
         // Direct match (5x112)
         // Need to build an array of "bolt pattern" listings
         if( tags.indexOf(bolt_pattern) !== -1 ) { // Direct match
-          items.add(product);
+          bolt_patterns.add(product);
         }
 
         // Others
@@ -134,7 +137,7 @@ router
           // Allows us to identify based on the CB of the wheel
           if( RegExp('CB*').test(tag) ) {
             value = tag.split(" "); // CB[0] 66.6[1]
-            if(value[1] >= central_bore) items.add(product); // Only if bore is greater than spec
+            if(value[1] >= central_bore) central_bores.add(product); // Only if bore is greater than spec
           }
 
           // Rim (ET Offset)
@@ -148,7 +151,7 @@ router
             // If match, add it!
             if (rim_offset) {
               rim_offset.forEach(function(offset) {
-                if(val <= offset.replace(/[^\d.-]/g,'')) items.add(product); // Only if ET is less than specoffset) items.add(product); // Only if ET is less than spec
+                if(val <= offset.replace(/[^\d.-]/g,'')) rim_offsets.add(product); // Only if ET is less than specoffset) items.add(product); // Only if ET is less than spec
               });
             }
           }
@@ -156,6 +159,17 @@ router
         });
       });
 
+      // Merge
+      // We only need the wheels which match all of the above
+      // This means we only need the items which appear in all arrays
+      // We need to base everything around the bolt_pattern values
+      // Bolt_pattern is a direct thing, meaning we can cycle through it and see if there are any matches with the other arrays
+      // https://stackoverflow.com/a/45304197/1143732
+      console.log("TESSSST");
+      console.log(bolt_patterns);
+      bolt_patterns.some(v => rim_offset.includes(v));
+      console.log(bolt_patterns);
+      
       // Response
       // This allows us to send specific groups of products back to the user
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
