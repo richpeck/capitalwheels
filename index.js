@@ -148,9 +148,9 @@ router
             // If match, add it!
             if ( rim_offset ) {
               rim_offset.forEach(function(offset) {
-                console.log(offset);
+                console.log(offset.replace(/[^\d.-]/g,''));
+                if(val <= offset.replace(/[^\d.-]/g,'')) items.add(product); // Only if ET is less than specoffset) items.add(product); // Only if ET is less than spec
               });
-              if(val <= rim_offset) items.add(product); // Only if ET is less than spec
             }
           }
 
