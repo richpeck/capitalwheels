@@ -100,10 +100,8 @@ router
       // This is used to get all the data required to show the products
       // Basically add the products to the variables mentioned below and return the ones which fit everything directly
       // Corresponding to a specific group of collections
-      var bolt_patterns = [];
-      var central_bores = [];
-      var rim_offsets   = [];
-      var items = new Set(); // https://dev.to/claireparker/how-to-create-an-array-of-unique-values-in-javascript-using-sets-5dg6
+      // https://dev.to/claireparker/how-to-create-an-array-of-unique-values-in-javascript-using-sets-5dg6
+      var items = new Set();
 
       // Product ID's
       // This allows us to get access to each product (to manage their tags)
@@ -116,9 +114,9 @@ router
 
         // Values
         // These are used to build a query against which we can filter the products
-        var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern.toString().toUpperCase()            : ""; // uppercase needed to ensure we could match 5X100
-        var central_bore = (request.query.central_bore) ? parseFloat(request.query.central_bore)                         : ""; // allows us to determine which bore is being sent
-        var rim_offset   = (request.query.offset)       ? parseFloat( request.query.offset.toString().replace(/[^\d.-]/g,'') ) : ""; // allows us to determine which offset is being sent
+        var bolt_pattern = (request.query.bolt_pattern) ? request.query.bolt_pattern.toString().toUpperCase()   : ""; // uppercase needed to ensure we could match 5X100
+        var central_bore = (request.query.central_bore) ? parseFloat(request.query.central_bore)                : ""; // allows us to determine which bore is being sent
+        var rim_offset   = (request.query.offset)       ? request.query.offset.split(",")                       : ""; // allows us to determine which offset is being sent
 
         // Bolt Pattern
         // Direct match (5x112)
@@ -144,7 +142,11 @@ router
           // Helps us identify the right wheel
           if( RegExp('ET*').test(tag) ) {
             value = tag.split(" "); // ET[0] 42MM[1]
-            val = Number((value[1]).match(/\d+$/));
+            val = Number((value[1]).match(/\d+$/)); // 42
+
+            // Cycle through provided offsets (should be array)
+            // If match, add it!
+            console.log(rim_offset);
             if(val <= rim_offset) items.add(product); // Only if ET is less than spec
           }
 
