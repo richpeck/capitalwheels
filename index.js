@@ -165,7 +165,9 @@ router
       // We need to base everything around the bolt_pattern values
       // Bolt_pattern is a direct thing, meaning we can cycle through it and see if there are any matches with the other arrays
       // https://stackoverflow.com/a/45304197/1143732
-      items = bolt_patterns;
+      bolt_patterns.forEach(function(element) {
+        if (rim_offets.has(element) && central_bores.has(element)) items.add(element);
+      });
 
       // Response
       // This allows us to send specific groups of products back to the user
