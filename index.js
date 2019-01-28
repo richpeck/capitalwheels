@@ -149,7 +149,7 @@ router
             if ( rim_offset ) {
               rim_offset.forEach(function(offset) {
                 console.log(offset);
-              }//toString().replace(/[^\d.-]/g,'')
+              }
               if(val <= rim_offset) items.add(product); // Only if ET is less than spec
             }
           }
