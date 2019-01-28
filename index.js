@@ -167,9 +167,9 @@ router
       // https://stackoverflow.com/a/45304197/1143732
       console.log("TESSSST");
       console.log(bolt_patterns);
-      bolt_patterns.some(v => rim_offset.includes(v));
+      //bolt_patterns.some(v => rim_offset.includes(v));
       console.log(bolt_patterns);
-      
+
       // Response
       // This allows us to send specific groups of products back to the user
       // Based on the "Bold Pattern" -> "Central Bore" -> "Rim ET/Offset"
