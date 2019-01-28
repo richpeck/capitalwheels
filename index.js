@@ -94,7 +94,7 @@ router
     // This is used to get a list of all the products that the store has
     // We're then able to filter the products based on their tags (much more direct than collections)
     // After doing this, we add the product to the applicable variables
-    shopify.product.list({ fields: ["id", "handle", "body_html", "tags", "images"] }).then(function(products){
+    shopify.product.list({ fields: ["id", "title", "handle", "body_html", "tags", "images"] }).then(function(products){
 
       // Vars
       // This is used to get all the data required to show the products
@@ -146,9 +146,8 @@ router
 
             // Cycle through provided offsets (should be array)
             // If match, add it!
-            if ( rim_offset ) {
+            if (rim_offset) {
               rim_offset.forEach(function(offset) {
-                console.log(offset.replace(/[^\d.-]/g,''));
                 if(val <= offset.replace(/[^\d.-]/g,'')) items.add(product); // Only if ET is less than specoffset) items.add(product); // Only if ET is less than spec
               });
             }
